@@ -1,0 +1,278 @@
+本目录收录的是工具库里面所有的函数名称，支持pip以及from import调用
+大部分都是形如m=rsa_dp(e,n,c,dp)可以直接一步得到解密，少数还要求中途输入，会在下面说明、
+默认已经填写的非了解人士不用调整
+
+def check(name)
+name 为模块导入名，例如 "hashlib"、"sage"；首次调用时导入，之后复用
+
+def search(input_file, output_file, keyword)
+input_file 为待搜索文件路径，output_file 为数字输出文件路径，keyword 为需要匹配的提示词
+
+def read_numbers(file_path)
+file_path 为数字文件路径；每行读取一个十进制、0x 十六进制或 0b 二进制数字，返回数字列表
+
+def _read_integer_rows(file_path)
+file_path 为矩阵文件路径，返回按行解析的整数行列表
+
+def _parse_integer_row(content, line_number, original_line)
+content 为待解析的一行，line_number 为错误提示行号，original_line 为原始文本行
+
+def read_matrix(file_path)
+file_path 为矩阵文件路径；每行是一个整数行，格式形如
+[1 1 1
+ 1 1 1
+ 1 1 1]
+[1 1 1
+ 1 1 1
+  1 1 1]；矩阵的每一行必须使用实际换行，行列数需要一致
+
+def _flatten_vector(value, name="vector")
+value 为一维列表或矩阵行列表，name 为错误提示中的变量名，返回一维整数列表
+
+def xor(a,b)
+a、b 为等长字符串，分别按 UTF-8 编码后逐字节异或，返回 bytes
+
+def enc_md5_hexdigest(text)
+
+def enc_sha1_hexdigest(text)
+
+def enc_sha256_hexdigest(text)
+
+def enc_sha512_hexdigest(text)
+
+def enc_md5_digest(text)
+
+def enc_sha1_digest(text)
+
+def enc_sha256_digest(text)
+
+def enc_sha512_digest(text)
+
+def enc_base64(text)
+
+def dec_base64(text)
+
+def hex_enc(text)
+
+def hex_dec(text)
+
+def dec_Chacha20_ploy1305(ciphertext,tag,nonce,key)
+ciphertext 为密文，tag 为认证标签，nonce 为随机数，key 为密钥
+
+def enc_AES_ECB(plaintext, key)
+
+def dec_AES_ECB(ciphertext,key)
+
+def enc_AES_CBC(plaintext, key, IV)
+
+def dec_AES_CBC(ciphertext, key, IV)
+
+def enc_AES_CTR(plaintext, key, nonce)
+
+def dec_AES_CTR(ciphertext, key, nonce)
+
+def enc_gb2312(text)
+text 为待编码字符串，返回 GB2312 字节
+
+def dec_TOTP(secret)
+secret 为 Base32 编码的 TOTP 密钥，返回当前时间窗口的 6 位验证码
+
+def number_base_conversion(number, original_base, target_base)
+number 为原始数字字符串，original_base 为原进制，target_base 为目标进制
+
+def Z_iroot(number,count)
+number 为整数，count 为根指数，返回 (整数根, 是否为精确根)
+
+def D_iroot(number,count,precision)
+number 为数字，count 为根指数，precision 为 Decimal 计算精度
+
+def dec_caeser(text,shift)
+text 为凯撒密文，shift 为左移位数，返回解密文本
+
+def dec_caeser_bruteforce(text)
+text 为凯撒密文，函数逐一尝试 0 到 25 的 shift 并打印结果
+
+def enc_caeser(text,shift)
+text 为明文，shift 为右移位数，返回加密文本
+
+def dec_vigenere(text,shift)
+text 为维吉尼尔密文，shift 为字母密钥字符串，返回解密文本
+
+def dec_emoji_aes(ciphertext, password, rotation=0)
+ciphertext 为 Emoji-AES 密文，password 为密码，rotation 为可选表旋转值，返回 Base64 字符串
+
+def dec_fence(ciphertext, rails)
+ciphertext 为栅栏密文，rails 为栅栏行数，返回解密文本
+
+def rsa_dp_dq(dp,dq,p,q,c)
+
+def rsa_dp(e,n,c,dp)
+
+def rsa_common_modular(n,e1,e2,c1,c2)
+
+def rsa_low_public_exponent_broadcast(e)
+
+def rsa_anm(n, e, c)
+
+def rsa_wiener(e, n, c)
+
+def rsa_format(n,e,c)
+
+def rsa_common_prime(n,e,c)
+
+def rsa_branch_pruning(n, c, e, leak, bits, length)
+
+def rsa_p_high(n,e,c,p_high,total_bits=512)
+
+def rsa_m_high(n,e,c,m_high,total_bits)
+
+def rsa_d_high_leak(n,e,c,d_high,total_bits,max_unknown_bits=24)
+
+def dsa_k(s,k,e,r,q)
+s、k、e、r 为 DSA 签名参数，q 为子群阶，返回私钥 x
+
+def dsa_double_k(s1,s2,r1,r2,message1,message2,p,q,g,y)
+s1/s2、r1/r2 为两条签名参数，message1/message2 为原始消息，p/q/g/y 为 DSA 参数
+
+def dsa_k_linear(s1,s2,r1,r2,a,b,message1,message2,p,q,g,y)
+s1/s2、r1/r2 为两条签名参数，a/b 为 nonce 关系系数，message1/message2 为消息，p/q/g/y 为 DSA 参数
+
+def dsa_k_square(s1,s2,r1,r2,message1,message2,p,q,g,y)
+s1/s2、r1/r2 为两条签名参数，message1/message2 为消息，p/q/g/y 为 DSA 参数，返回 (x,k)
+
+def Elgamal_k(s,k,e,r,p,q,y,g)
+s、k、e、r 为 ElGamal 签名参数，p/q/y/g 为群参数和公钥，返回私钥 x
+
+def Elgamal_double_k(s1,s2,r1,r2,message1,message2,p,q,y,g)
+s1/s2、r1/r2 为两条签名参数，message1/message2 为消息，p/q/y/g 为 ElGamal 参数
+
+def Elgamal_k_square(s1,s2,r1,r2,message1,message2,p,q,y,g)
+s1/s2、r1/r2 为两条签名参数，message1/message2 为消息，p/q/y/g 为 ElGamal 参数，返回 (x,k)
+
+def Elgamal_k_linear(s1,s2,s3,r1,r2,r3,message1,message2,message3,p,q,y,g)
+s1/s2/s3、r1/r2/r3 为三条签名参数，message1/2/3 为消息，p/q/y/g 为 ElGamal 参数
+
+def ECDSA_k(s,k,e,r,p,q,y,g)
+s、k、e、r 为 ECDSA 签名参数，p/q/y/g 为曲线、阶和公钥参数，返回私钥 x
+
+def ECDSA_double_k(s1,s2,r1,r2,message1,message2,p,q,y,g)
+s1/s2、r1/r2 为两条签名参数，message1/message2 为消息，p/q/y/g 为 ECDSA 参数
+
+def ECDSA_k_square(s1,s2,r1,r2,message1,message2,p,q,y,g)
+s1/s2、r1/r2 为两条签名参数，message1/message2 为消息，p/q/y/g 为 ECDSA 参数，返回 (x,k)
+
+def ECDSA_k_linear(s1,s2,s3,r1,r2,r3,message1,message2,message3,p,q,y,g)
+s1/s2/s3、r1/r2/r3 为三条签名参数，message1/2/3 为消息，p/q/y/g 为 ECDSA 参数
+
+def Schnorr_k(s,k,e,r,p,q,y,g)
+s、k、e、r 为 Schnorr 签名参数，p/q/y/g 为群参数和公钥，返回私钥 x
+
+def Schnorr_double_k(s1,s2,r1,r2,message1,message2,p,q,y,g)
+s1/s2、r1/r2 为两条签名参数，message1/message2 为消息，p/q/y/g 为 Schnorr 参数
+
+def Schnorr_k_square(s1,s2,r1,r2,message1,message2,p,q,y,g)
+s1/s2、r1/r2 为两条签名参数，message1/message2 为消息，p/q/y/g 为 Schnorr 参数，返回 (x,k)
+
+def Schnorr_k_linear(s1,s2,s3,r1,r2,r3,message1,message2,message3,p,q,y,g)
+s1/s2/s3、r1/r2/r3 为三条签名参数，message1/2/3 为消息，p/q/y/g 为 Schnorr 参数
+
+def ECDSA_mirror(r,s,n)
+r、s 为签名值，n 为签名阶，返回 (r,n-s)
+
+def Elgamal_hash_ignore_signing(p,y,g,v)
+p/y/g 为 ElGamal 参数，v 为待选参数且需与 p-1 互素，返回 (r,s)
+
+def diffie_hellman_BOb_gets(p)
+p 为 DH 模数，返回边界情况对应的字符串元组
+
+def diffie_hellman_subgroup(p,g)
+p 为 DH 模数，g 为生成元；运行中显示 B，需输入交互反馈 s，返回 (a0,M)
+
+def rsa_Pohlig_hellman(n, e, c, m=None, order=None, order_factors=None)
+
+def rsa_Pollard_p_1(n, e, c, bound=10000, stage2_bound=None, bases=(2, 3, 5, 7, 11),n_inner=None, bounds=None)
+
+def rsa_Willim_p_1(n, e, c, bound=1000, parameter_limit=100, exponent=None)
+
+def rsa_BF(n, e, c, delta=0.28, m=4, config_path=None, timeout=300)
+
+def hash_brute_force(n,suffix_former,suffix_latter,target=None)
+n 为中间字符串长度，suffix_former/suffix_latter 为前后缀，target 为目标 SHA-256 哈希
+
+def hash_md5_length_extension(old_hash,message,append,start,end)
+old_hash 为原 MD5 哈希，message 为原消息，append 为追加数据，start/end 为密钥长度枚举范围
+
+def mt19937_reverse(outputs,position=None,start=None,end=None)
+outputs 为连续的 32 位输出列表，position 为可选的目标位置，start/end 为可选的预测区间
+
+def mt19937_blackbox(outputs,matrix_path,position=None,start=None,end=None)
+outputs 为黑盒输出列表，matrix_path 为 Sage .sobj 矩阵文件路径，position 为可选位置，start/end 为可选预测区间
+
+def lfsr_recover(bits,n=None,position=None,start=None,end=None)
+bits 为输出比特列表或比特字符串，n 为寄存器长度，position 为可选位置，start/end 为可选预测区间
+
+def detect_ECC(a,b,p)
+a/b 为椭圆曲线系数，p 为有限域模数，返回曲线阶，需要 Sage
+
+def ECC_BSGS(xp,yp,xq,yq,a,b,q)
+xp/yp 为点 P 坐标，xq/yq 为点 Q 坐标，a/b 为曲线系数，q 为有限域模数
+
+def ECC_smart(xp,yp,xq,yq,a,b,q)
+xp/yp、xq/yq 为 P/Q 坐标，a/b 为曲线系数，q 为有限域模数，需要 Sage
+
+def ECC_mov(xp,yp,xq,yq,a,b,q)
+xp/yp、xq/yq 为 P/Q 坐标，a/b 为曲线系数，q 为有限域模数，需要 Sage
+
+def ECC_invalid(xp,yp,xq,yq,q)
+xp/yp 为基点坐标，xq/yq 为目标点坐标，q 为有限域模数，需要 Sage
+
+def ECC_kangaroo(xp,yp,xq,yq,a,b,q,start,end)
+xp/yp、xq/yq 为 P/Q 坐标，a/b 为曲线系数，q 为有限域模数，start/end 为 k 的范围
+
+def ECB_MITM(ciphertext,message,key1_know,key2_know)
+ciphertext 为双重 AES-ECB 密文，message 为已知明文，key1_know/key2_know 为两把密钥的已知前缀
+
+def ECB_pkcs7(base_ciphertext,message,ciphertext)
+base_ciphertext 为发送空格或基准输入的反馈，message 为待构造的基础消息，ciphertext 为各长度反馈列表；运行中需按提示输入服务器返回的密文 hex
+
+def CBC_struct(ciphertext, plaintext, index=[], target=[], src_index=1)
+ciphertext/ plaintext 为已知密文和明文，index 为要控制的字节位置列表，target 为对应目标字节列表，src_index 为源块下标
+
+def HLP(n,m,r,N,C=[],scale_bits=200,C_path=None,)
+n/m/r/N 为 HLP 维度参数，C 为输入矩阵，scale_bits 为缩放位数，C_path 为 C 的文件路径，C 与 C_path 二选一
+
+def CVP(B=[],target=[],B_path=None,target_path=None,)
+B 为格基矩阵，target 为目标向量，B_path/target_path 分别为矩阵和向量文件路径，直接传入或使用路径二选一
+
+def HNP_ECDSA_nonce(q,pubx,puby,leak,data=[],data_path=None,)
+q 为签名子群阶，pubx/puby 为公钥坐标，leak 为泄露位数，data 每行是 [h,r,s,b]，data_path 为数据文件路径
+
+def HNP_LCG_state_low(m,a,b,bits,c=[],c_path=None,)
+m 为模数，a/b 为 LCG 递推参数，bits 为未知低位数，c 为观测列表，c_path 为观测文件路径
+
+def HNP_LCG_state_recurrence(m,c=[],c_path=None,)
+m 为模数，c 为同一乘法 LCG 的输出列表，c_path 为输出文件路径
+
+def HSSP(n,m,M,h=[],h_path=None,)
+n/m 为矩阵维度，M 为模数，h 为输入向量，h_path 为向量文件路径，h 与 h_path 二选一
+
+def LWE(q,secret_bound,error_bound,M,data=[],A_path=None,b_path=None,)
+q 为模数，secret_bound/error_bound 为秘密和误差边界，M 为嵌入参数，data 为 {"A":矩阵,"b":向量}，A_path/b_path 为对应文件路径
+
+def AHSSP(h=[],e=[],n=None,m=None,p=None,h_path=None,e_path=None)
+h/e 为输入向量，n/m 为维度，p 为模数，h_path/e_path 分别为向量文件路径
+
+def NTRU(N,p,q,f=[],g=[],r=[],message=[],ciphertext=[],h=[],message_bound=1,f_path=None,g_path=None,r_path=None,message_path=None,ciphertext_path=None,h_path=None)
+N 为多项式维度，p/q 为模数，f/g/r/message/ciphertext/h 为 NTRU 向量，message_bound 为消息边界，各 *_path 为对应文件路径
+
+def NTRU_component(N,p,q,f=[],g=[],r=[],message=[],ciphertext=[],h=[],f_path=None,g_path=None,r_path=None,message_path=None,ciphertext_path=None,h_path=None,message_bound=1)
+参数含义与 NTRU 相同，为兼容调用保留的入口
+
+def ACD(x=[],lam=200,error_bound=None,x_path=None)
+x 为近似倍数列表，lam 为缩放位数，error_bound 为可选误差边界，x_path 为 x 的文件路径
+
+def GGH_Nguyen(B=[],C=[],n=None,delta=1,B_path=None,C_path=None)
+B 为格基矩阵，C 为目标向量，n 为维度，delta 为误差边界，B_path/C_path 为对应文件路径
+
+总计101项函数
+

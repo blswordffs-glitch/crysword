@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crysword"
+version = "0.1.0"
+description = "CrySword CTF Crypto Toolkit"
+requires-python = ">=3.12"
+
+[tool.setuptools]
+py-modules = ["crysword", "sageworker"]
+
+[tool.setuptools.data-files]
+"." = ["sageworker_config.json"]

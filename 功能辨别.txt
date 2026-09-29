@@ -1,0 +1,112 @@
+以下为本工具包含的签到题型，给出特征方便查询：
+另外还有基础的快捷写法，如何调用说明在功能菜单：
+
+古典密码：
+凯撒密码：
+全是大写或者是小写字母，要靠经验判断是否是凯撒
+栅栏密码：
+题目中要有提示
+维吉尼尔密码：
+像是凯撒密码的题干，又给出了key
+
+RSA：
+dp dq泄露：
+p q n e c
+dp泄露：
+e n c dp
+共模攻击：
+n e1 e2 c1 c2 同一个n用于多组加密
+低广播指数攻击：
+e n1 n2 n3 c1 c2 c3 同一个小e用于多组加密
+维纳攻击，BF攻击：
+n e过大 c
+phi,e不互质：
+ed!=1 mod phi
+高位泄露系列：
+m,d,p高位泄露，p要一半已知，m一半，d四分之一
+剪枝：
+p^(q<<nbits)
+format分解：
+p,q接近
+Common prime:
+p,q构成有相同大素数
+Pohlig-hellman:
+n由多个小因子可factor构成
+Pollard's p-1:
+p-1 B smooth
+
+数字签名：
+通用系列：k泄露 k复用 k线性 k相关 k平方
+DSA sk=e+xr modp
+Elgamal sk=e-xr modp-1
+哈希忽略伪造签名
+schnorrs s=k+xe modq
+ECDSA Xx=u1G+u2Q(验证签名） sk=e+rd modq
+
+ECC：
+ECDLP：P=k*G
+普通来说就是n的大小在2**40的量级
+使用BSGS rho
+阶光滑时使用 Pohlig-hellman
+Smart's attack:
+E.order=n
+Mov's attack:
+E.order=n+1 原理上也可以n-1,实际上是n|p**k-1,可以适配更多形式
+无效曲线攻击：
+计算机没有验证G，Q在曲线上，一般题目上没有体现，要靠看，猜测
+Pollard kangaroo：
+触发条件为Q=dG,d的范围已知且小于等于2**40
+
+diffie hallman
+未验证B输入合法性无视a预测s（2<=B<=p-2)
+未验证B输入合法性直接窃取a （未检查B的群阶大小r<<p-1)
+
+哈希函数：
+缺位爆破
+prefix+suffix=target
+前导0控制
+startswith位数少的话代码，多的话查询比特币网站
+长度扩展攻击
+服务器返回Hash(key+message),想得到hash(key+message+append)
+
+ECB
+重组攻击
+覆盖型推出分组单独加密
+MITM中间人攻击
+二次加密从两边到中间字典验证
+pcks7填充攻击
+message+flag填充型
+CBC_struct
+非开始时的位置开始，隔一块里面固定一次
+
+伪随机数生成器：
+LFSR全破译 
+已知2n位对应明文密文
+MT19937
+全逆向
+已知624位连续输出
+黑盒攻击
+624组独立输出
+
+格密码：
+HNP ECDSA nonce低位泄露 siki=hi+rid modq ki泄露低位
+HNP  LCG状态递增  Ci+1=aCi+bi bi是小量
+HNP LCG高位泄露  Ci=Hi+ri ri小量
+aix-bi=ci modp
+LWE 
+b=As+e modq e小量，s小量，矩阵背景，求s
+GGH
+c=mB+e B=UV c小量，e小量，B坏基，V好基，U数乘
+Nguyen Attack:ei为+-i的小量
+NTRU
+P=Z[x]/x^N-1 c=rh+m modq m小量
+HSSP
+h=aA a小量，A是小量矩阵，a,A未知
+AHSSP
+h=aA-se
+明文大小LLL攻击
+Y=NS N为随机数乘矩阵，S一行为flag ascil,s的其他为随机大范围
+HLP
+相较于HSSP为B只是小格基隐藏非0，1流，只求到B
+ACD
+xi=qip+ri ri小量，qi,p私

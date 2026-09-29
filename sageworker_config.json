@@ -1,0 +1,6 @@
+{
+  "config_version": 1,
+  "wsl_distribution": "Ubuntu",
+  "sage_path": "sage",
+  "timeout": 60
+}
